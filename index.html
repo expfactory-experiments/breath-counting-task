@@ -23,12 +23,15 @@
 <script src='js/jspsych/plugins/jspsych-survey-text.js'></script>
 <script src='js/jspsych/plugins/jspsych-call-function.js'></script>
 <script src='js/jspsych/poldrack_plugins/poldrack_utils.js'></script>
-<script src='experiment.js'></script>
 
 <script>
 $( document ).ready(function() {
 
-    jsPsych.init({
+
+    $.getScript( "experiment.js", function( data, textStatus, jqxhr ) {
+
+        jsPsych.init({
+
              timeline: breath_counting_task_experiment,
              display_element: "getDisplayElement",
              fullscreen: true,
@@ -47,18 +50,25 @@ $( document ).ready(function() {
 
                  promise.then(function(data) {
 
-                     $.post("/save", {data: data}, function(){
-                        document.location = "/next";
-                     })
+                     $.ajax({
+                         type: "POST",
+                         url: '/save',
+                         data: { "data": data },
+                         success: function(){ document.location = "/next" },
+                         dataType: "application/json",
 
-                 }, function(err) {
-                      console.log(err);
-
-                       // If error, assue local save
-                       jsPsych.data.localSave('breath-counting-experiment_results.csv', 'csv');
-                 });
+                         // Endpoint not running, local save
+                         error: function(err) {
+                             console.log(err);
+                             // If error, assue local save
+                             jsPsych.data.localSave('breath-counting-experiment_results.csv', 'csv');
+                         }
+                     });
+                 })
              }
-      });
+         });
+    });
+
 });
 </script>
 </body>
