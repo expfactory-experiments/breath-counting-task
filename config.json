@@ -1,0 +1,12 @@
+{
+    "name": "Breath Counting Task",
+    "exp_id": "breath-counting-task",
+    "description": "Breath Counting Task",
+    "instructions": "TBD",
+    "url": "https://github.com/earcanal/breath-counting-task",
+    "template":"jspsych",
+    "contributors": ["Paul Sharpe",
+                     "Vanessa Sochat"], 
+    "time":15,
+    "reference": ["https://www.frontiersin.org/articles/10.3389/fpsyg.2014.01202/full"]
+}

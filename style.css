@@ -1,0 +1,14 @@
+.page p {
+  margin: 0;
+  padding-bottom: .2em;
+}
+
+.display_stage {
+  background-color: black;
+  color: white;
+  box-shadow: none;
+}
+
+.display_stage_background {
+	background-color: black;
+}
