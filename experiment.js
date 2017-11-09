@@ -175,4 +175,3 @@ breath_counting_task_experiment.push(bc_first_block);
 breath_counting_task_experiment.push(bc_node);
 breath_counting_task_experiment.push(beep_block);
 breath_counting_task_experiment.push(end_block);
-console.log('doe')
