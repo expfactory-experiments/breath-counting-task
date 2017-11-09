@@ -60,5 +60,8 @@ To serve your battery
 # Install Experiments
 ########################################
 
+%labels
+    APPLICATION EXPFACTORY    
+
 %appinstall breath-counting-task
     cd .. && expfactory install -f https://github.com/expfactory-experiments/breath-counting-task
