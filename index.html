@@ -23,15 +23,12 @@
 <script src='js/jspsych/plugins/jspsych-survey-text.js'></script>
 <script src='js/jspsych/plugins/jspsych-call-function.js'></script>
 <script src='js/jspsych/poldrack_plugins/poldrack_utils.js'></script>
+<script src='experiment.js'></script>
 
 <script>
 $( document ).ready(function() {
 
-
-    $.getScript( "experiment.js", function( data, textStatus, jqxhr ) {
-
         jsPsych.init({
-
              timeline: breath_counting_task_experiment,
              display_element: "getDisplayElement",
              fullscreen: true,
@@ -40,8 +37,6 @@ $( document ).ready(function() {
              },
 
              on_finish: function(data){
-
-
                  // Serialize the data
                  var promise = new Promise(function(resolve, reject) {
                      var data = jsPsych.data.dataAsJSON();
@@ -67,7 +62,6 @@ $( document ).ready(function() {
                  })
              }
          });
-    });
 
 });
 </script>
