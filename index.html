@@ -28,15 +28,28 @@
 
 <script>
 $(document).ready(function() {
+    var myfunc = function() {
+        return 'do nothing';
+    }
+    var block = {
+        type: 'call-function',
+        func: myfunc
+    }
     var skip = $.QueryString.skip ? $.QueryString.skip : 0;  
     console.log('skip = ' + skip);
-    if (skip == 1)
-        document.location = "/next";
+    if (skip == 1) {
+        timeline = [];
+        timeline.push(block);
+        fullscreen = false;
+    } else {
+        timeline = breath_counting_task_experiment;
+        fullscreen = true;
+    }
 
     jsPsych.init({
-         timeline: breath_counting_task_experiment,
+         timeline: timeline,
          display_element: "getDisplayElement",
-         fullscreen: true,
+         fullscreen: fullscreen,
          on_trial_finish: function(data){
            addID('breath-counting-experiment')
          },
@@ -62,7 +75,9 @@ $(document).ready(function() {
                              document.location = "/next";
                          } else {
                              // if error, assume local save
-                             jsPsych.data.localSave('breath-counting-experiment_results.csv', 'csv');
+                             if (skip == 0) {
+                                 jsPsych.data.localSave('breath-counting-experiment_results.csv', 'csv');
+                             }
                          }
                      }
                  });
