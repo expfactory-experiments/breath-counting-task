@@ -25,7 +25,7 @@ var bc_first_block = {
   type: 'poldrack-single-stim',
   stimulus: '<div class=centerbox><p class = center-block-text>Place your attention on the breath.</p>' + 
   '<p class = center-block-text>Press the down arrow after your first exhale as you count "one", ' +
-  'then close your eyes and continue counting breaths and pressing the correct arrow key.</p></div>',
+  'then close your eyes and continue counting breaths and pressing the correct arrow key (1-8 = down, 9 = right).</p></div>',
   is_html: true,
   data: {
     trial_id: "breath_counting"
@@ -128,18 +128,17 @@ var instructions_block = {
   },
   pages: [
     "<div class=centerbox><p class=block-text>In this task, we would like you to be aware of your breath.</p>" +
-    "<p class=block-text>Close your eyes and breathe in and out three times.  Count those three breaths, and at the end of the third out-breath, open your eyes.</p>" +
-    "<p class=block-text>Just breathe normally, without trying to control the breath.</p></div>",
-    "<div class=centerbox><p class=block-text>Try to rest your attention on the sensation that told you whether you were breathing in or out.</p>" +
+    "<p class=block-text>Close your eyes and notice whether you are breathing in or out, until you have counted three breaths (in and out is one breath), then open your eyes.</p></div>",
+    "<div class=centerbox><p class=block-text>Use this same technique when counting your breaths in this task.  There's no need to control the breath.  Just breathe normally.</p>" +
     "<p class=block-text>At some point, you may notice your attention has wandered from the breath.  That's okay.  Just gently place it back on the breath.</p></div>",
     "<div class=centerbox><p class=block-text>To help you stay with the breath, you'll use a small part of your attention " +
     "to silently count breaths from 1 to 9, again and again.  <em>An in and out breath together make one count.</em></p>" +  
     "<p class=block-text>Say the count softly in your mind so it only gets a little attention while most of the attention is on feeling the breath.</p>" +
     "<p class=block-text>Please press the <em><strong>down arrow</strong> once for each of <strong>breaths 1-8</strong></em>, " + 
     "and the <em><strong>right arrow</strong> once on <strong>breath 9</strong>.</em>  This means you'll be pressing a button once with each breath.</p></div>",
-    "<div class=centerbox><p class=block-text>We suggest you sit in an upright, relaxed posture so that you can comfortably rest the index and middle fingers of your dominant hand over the down arrow and right arrow keys.</p>" +
-    "<p class=block-text>The task will last about 15 minutes.  Your eyes will be closed, so a tone will sound to end the task.</p>" +
-    "<p class=block-text>Gently let go of any thoughts or feelings which pull your attention away from your breath.  The more you can do this, the easier you will find it to keep count.</p></div>"
+    "<div class=centerbox><p class=block-text>We suggest you sit in an upright, relaxed posture that feels comfortable.</p>" +
+    "<p class=block-text>Place the keyboard so that you can comfortably rest the index and middle fingers of your dominant hand over the down arrow and right arrow keys.</p>" +
+    "<p class=block-text>The task will last about 15 minutes.  Your eyes will be closed, so a tone will sound to end the task.  Ensure that your computer's volume is set high enough for you to hear the end tone.</p></div>"
   ],
   allow_keys: false,
   show_clickable_nav: true,

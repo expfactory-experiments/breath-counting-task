@@ -23,51 +23,63 @@
 <script src='js/jspsych/plugins/jspsych-survey-text.js'></script>
 <script src='js/jspsych/plugins/jspsych-call-function.js'></script>
 <script src='js/jspsych/poldrack_plugins/poldrack_utils.js'></script>
+<script src='js/util.js'></script>
 <script src='experiment.js'></script>
 
 <script>
-$( document ).ready(function() {
+$(document).ready(function() {
+    var myfunc = function() {
+        return 'do nothing';
+    }
+    var block = {
+        type: 'call-function',
+        func: myfunc
+    }
+    var Skip = $.QueryString.Skip ? $.QueryString.Skip : 0;
+    if (Skip == 1) {
+        timeline = [];
+        timeline.push(block);
+        fullscreen = false;
+    } else {
+        timeline = breath_counting_task_experiment;
+        fullscreen = true;
+    }
 
-        jsPsych.init({
-             timeline: breath_counting_task_experiment,
-             display_element: "getDisplayElement",
-             fullscreen: true,
-             on_trial_finish: function(data){
-               addID('breath-counting-experiment')
-             },
+    jsPsych.init({
+         timeline: timeline,
+         display_element: "getDisplayElement",
+         fullscreen: fullscreen,
+         on_trial_finish: function(data){
+           addID('breath-counting-experiment')
+         },
 
-             on_finish: function(data){
-                 // Serialize the data
-                 var promise = new Promise(function(resolve, reject) {
-                     var data = jsPsych.data.dataAsJSON();
-                     resolve(data);
-                 })
+         on_finish: function(data){
+             // Serialize the data
+             var promise = new Promise(function(resolve, reject) {
+                 var data = jsPsych.data.dataAsJSON();
+                 resolve(data);
+             })
 
-                 promise.then(function(data) {
+             promise.then(function(data) {
+                 $.ajax({
+                     type: "POST",
+                     url: '/save',
+                     data: { "data": data },
+                     success: function(){ document.location = "/next" },
+                     dataType: "application/json",
 
-                     $.ajax({
-                         type: "POST",
-                         url: '/save',
-                         data: { "data": data },
-                         success: function(){ document.location = "/next" },
-                         dataType: "application/json",
-
-                         // Endpoint not running, local save
-                         error: function(err) {
-
-                             if (err.status == "200"){
-                                 document.location = "/next";
-                             } else {
-
-                                 // if error, assume local save
-                                 jsPsych.data.localSave('breath-counting-experiment_results.csv', 'csv');
-                             }
+                     // Endpoint not running, local save
+                     error: function(err) {
+                         if (err.status == "200"){
+                             document.location = "/next";
+                         } else { // local save
+                            jsPsych.data.localSave('breath-counting-experiment_results.csv', 'csv');
                          }
-                     });
-                 })
-             }
-         });
-
+                     }
+                 });
+             })
+         }
+     });
 });
 </script>
 </body>
