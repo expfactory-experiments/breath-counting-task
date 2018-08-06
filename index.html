@@ -35,9 +35,8 @@ $(document).ready(function() {
         type: 'call-function',
         func: myfunc
     }
-    var skip = $.QueryString.skip ? $.QueryString.skip : 0;  
-    console.log('skip = ' + skip);
-    if (skip == 1) {
+    var Skip = $.QueryString.Skip ? $.QueryString.Skip : 0;
+    if (Skip == 1) {
         timeline = [];
         timeline.push(block);
         fullscreen = false;
