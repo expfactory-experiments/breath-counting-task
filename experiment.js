@@ -131,7 +131,7 @@ var instructions_block = {
     "<p class=block-text>Close your eyes and notice whether you are breathing in or out, until you have counted three breaths (in and out is one breath), then open your eyes.</p></div>",
     "<div class=centerbox><p class=block-text>Use this same technique when counting your breaths in this task.  There's no need to control the breath.  Just breathe normally.</p>" +
     "<p class=block-text>At some point, you may notice your attention has wandered from the breath.  That's okay.  Just gently place it back on the breath.</p></div>",
-    "<div class=centerbox><p class=block-text>To help attention stay with the breath, you'll use a small part of your attention " +
+    "<div class=centerbox><p class=block-text>To help you stay with the breath, you'll use a small part of your attention " +
     "to silently count breaths from 1 to 9, again and again.  <em>An in and out breath together make one count.</em></p>" +  
     "<p class=block-text>Say the count softly in your mind so it only gets a little attention while most of the attention is on feeling the breath.</p>" +
     "<p class=block-text>Please press the <em><strong>down arrow</strong> once for each of <strong>breaths 1-8</strong></em>, " + 

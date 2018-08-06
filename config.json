@@ -3,7 +3,7 @@
     "exp_id": "breath-counting-task",
     "description": "Breath Counting Task",
     "instructions": "TBD",
-    "url": "https://github.com/earcanal/breath-counting-task",
+    "url": "https://github.com/expfactory-experiments/breath-counting-task",
     "template":"jspsych",
     "contributors": ["Paul Sharpe",
                      "Vanessa Sochat"], 
