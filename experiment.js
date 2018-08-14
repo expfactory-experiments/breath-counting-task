@@ -132,10 +132,13 @@ var instructions_block = {
     "<div class=centerbox><p class=block-text>Use this same technique when counting your breaths in this task.  There's no need to control the breath.  Just breathe normally.</p>" +
     "<p class=block-text>At some point, you may notice your attention has wandered from the breath.  That's okay.  Just gently place it back on the breath.</p></div>",
     "<div class=centerbox><p class=block-text>To help you stay with the breath, you'll use a small part of your attention " +
-    "to silently count breaths from 1 to 9, again and again.  <em>An in and out breath together make one count.</em></p>" +  
+    "to silently count breaths from 1 to 9, again and again.  <strong><em>An in and out breath together make one count.</em></strong></p>" +  
     "<p class=block-text>Say the count softly in your mind so it only gets a little attention while most of the attention is on feeling the breath.</p>" +
-    "<p class=block-text>Please press the <em><strong>down arrow</strong> once for each of <strong>breaths 1-8</strong></em>, " + 
-    "and the <em><strong>right arrow</strong> once on <strong>breath 9</strong>.</em>  This means you'll be pressing a button once with each breath.</p></div>",
+    "<p class=block-text>Press the <em><strong>down arrow</strong> once on <strong>breaths 1-8</strong></em>, " + 
+    "and the <em><strong>right arrow</strong> once on <strong>breath 9</strong>.</em>  This means you'll be pressing a button once with each breath. " +
+    "Each time you reach breath 9, start counting again at 1.</p>" + 
+    "<div><table><tr><td>Breath number</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>1</td><td>2</td><td>etc.</td></tr>" +
+    "<tr><td>Press this key once</td><td>&darr;</td><td>&darr;</td><td>&darr;</td><td>&darr;</td><td>&darr;</td><td>&darr;</td><td>&darr;</td><td>&darr;</td><td>&rarr;</td><td>&darr;</td><td>&darr;</td><td>etc.</td></tr></table></div></div>",
     "<div class=centerbox><p class=block-text>We suggest you sit in an upright, relaxed posture that feels comfortable.</p>" +
     "<p class=block-text>Place the keyboard so that you can comfortably rest the index and middle fingers of your dominant hand over the down arrow and right arrow keys.</p>" +
     "<p class=block-text>The task will last about 15 minutes.  Your eyes will be closed, so a tone will sound to end the task.  Ensure that your computer's volume is set high enough for you to hear the end tone.</p></div>"

@@ -1,3 +1,11 @@
+table {
+	text-align: center;
+}
+table td {
+	font-size: 24px;
+	border: 1px solid white;
+	padding: .5em;
+}
 .page p {
   margin: 0;
   padding-bottom: .2em;
