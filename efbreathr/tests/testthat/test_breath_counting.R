@@ -1,8 +1,12 @@
 library(tidyverse)
 context('Breath counting')
 
+test_that("process_expfactory_bc_file() can process a JSON file", {
+  expect_silent(efbreathr::process_breath_counting('../fixtures/breath-counting-task-results.json', p=1))
+})
+
 test_that("process_expfactory_bc_file() can process a CSV file", {
-  expect_silent(efbreathr::process_expfactory_bc_file('../fixtures/1/1/1_bc.csv', p=1))
+  expect_silent(efbreathr::process_breath_counting('../fixtures/1/1/1_bc.csv', p=1))
 })
 
 test_that("expfactory_breath_counting_to_csv() works", {

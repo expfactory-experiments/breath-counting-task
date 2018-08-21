@@ -35,12 +35,12 @@ expfactory_breath_counting_to_csv <- function(path, t, exclude) {
     rowwise() %>%
     mutate(p=as.integer(gsub(".*/.*/(\\d+)/.*$", '\\1', path))) %>%
     filter(! p %in% exclude ) %>%
-    do(., efbreathr::process_expfactory_bc_file(.$path, .$p))
+    do(., efbreathr::process_breath_counting(.$path, .$p))
   write.table(df, paste(path, '/bc.csv', sep=''), sep = ",", row.names = FALSE)
 }
 
 #' @export
-process_expfactory_bc_file <- function(path, p) {
+process_breath_counting <- function(path, p) {
   bc <- read.csv(path, header = TRUE)
   bc %>% filter(trial_id == 'breath_counting') %>%
     select(trial_index,rt,key_press) %>%
