@@ -7,9 +7,9 @@
 #' @return data.frame
 summarise_breath_counting_accuracy <- function(data, participants) {
   bc_accuracy <- data %>%
-    select(subject) %>%
+    select(p) %>%
     unique() %>%
-    dplyr::rename(participant = subject) %>%
+    dplyr::rename(participant = p) %>%
     mutate(total=0,correct=0,incorrect=0)
   expand.grid(p=participants$p) %>%
     rowwise() %>%
@@ -40,14 +40,13 @@ expfactory_breath_counting_to_csv <- function(path, t, exclude) {
 }
 
 #' @export
-process_expfactory_bc_file <- function(bc_file, s) {
-  bc <- read.csv(bc_file, header = TRUE)
+process_expfactory_bc_file <- function(path, p) {
+  bc <- read.csv(path, header = TRUE)
   bc %>% filter(trial_id == 'breath_counting') %>%
     select(trial_index,rt,key_press) %>%
     # column headers from original ePrime task
     dplyr::rename(Sample = trial_index, response = key_press) %>%
-    mutate(Sample = Sample - 2, response = ifelse(response == 40, '{DOWNARROW}', '{RIGHTARROW}'),
-           subject = s)
+    mutate(Sample = Sample - 2, response = ifelse(response == 40, '{DOWNARROW}', '{RIGHTARROW}'), p = p)
 }
 
 #' Convert ePrime breath counting data to CSV
@@ -98,7 +97,7 @@ process_eprime_file <- function(path) {
 #' @keywords breath counting meditation
 #' @export
 breath_counting_accuracy <- function(p, bc_df) {
-  df        <- filter(bc_df, subject == p)
+  df        <- filter(bc_df, p == p)
   resp      <- 1
   row       <- 1
   total     <- 0

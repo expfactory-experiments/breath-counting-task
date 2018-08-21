@@ -1,6 +1,10 @@
 library(tidyverse)
 context('Breath counting')
 
+test_that("process_expfactory_bc_file() can process a CSV file", {
+  expect_silent(efbreathr::process_expfactory_bc_file('../fixtures/1/1/1_bc.csv', p=1))
+})
+
 test_that("expfactory_breath_counting_to_csv() works", {
   expect_silent(efbreathr::expfactory_breath_counting_to_csv('../fixtures/1', 1, c(2,6,7)))
 })
@@ -8,9 +12,9 @@ test_that("expfactory_breath_counting_to_csv() works", {
 # fixture setup
 bc_df       <- read_csv('../fixtures/1/bc.csv')
 bc_accuracy <- bc_df %>%
-  select(subject) %>%
+  select(p) %>%
   unique() %>%
-  dplyr::rename(participant = subject) %>%
+  dplyr::rename(participant = p) %>%
   mutate(total=0,correct=0,incorrect=0)
 
 test_that("fixture is a data frame", {
@@ -18,7 +22,7 @@ test_that("fixture is a data frame", {
 })
 
 test_that("breath_counting_accuracy() returns a data frame", {
-  expect_is(efbreathr::breath_counting_accuracy(p = bc_df[, 'subject'], bc_df = bc_df), "data.frame")
+  expect_is(efbreathr::breath_counting_accuracy(p = bc_df[, 'p'], bc_df = bc_df), "data.frame")
 })
 
 test_that("breath_counting_accuracy() returns a data frame via do()", {
