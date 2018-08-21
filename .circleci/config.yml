@@ -1,0 +1,33 @@
+version: 2
+jobs:
+  build:
+    working_directory: /tmp/src
+    docker:
+      - image: appsilon/ci-base:1.0
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - deps1-{{ .Branch }}
+            - deps1-
+      - run:
+          command: |
+            cd /tmp/src/
+            ls
+            cd efbreathr
+            R -e 'devtools::install_deps(dependencies = TRUE)'
+      - save_cache:
+          key: deps1-{{ .Branch }}
+          paths:
+            - "/usr/local/lib/R/site-library"
+      - run:
+          command: |
+            echo "Installing package expfactoryr"
+            R -e "devtools::install_github('expfactory/expfactoryr')"
+            cd /tmp/src/efbreathr
+            echo "Running devtools checks and tests for efbreathr"
+            R -e 'devtools::check()'
+            R -e 'devtools::test()'
+      - store_artifacts:
+          path: /tmp/src/efbreathr/man/
+          destination: man
