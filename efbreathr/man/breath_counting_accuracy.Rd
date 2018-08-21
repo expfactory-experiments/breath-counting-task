@@ -4,12 +4,10 @@
 \alias{breath_counting_accuracy}
 \title{Breath Counting Accuracy}
 \usage{
-breath_counting_accuracy(p, bc_df)
+breath_counting_accuracy(df)
 }
 \arguments{
-\item{p}{Participant number}
-
-\item{bc_df}{Breath counting data frame}
+\item{df}{Breath counting data frame}
 }
 \description{
 Process ePrime breath counting data
@@ -18,3 +16,4 @@ Process ePrime breath counting data
 \keyword{breath}
 \keyword{counting}
 \keyword{meditation}
+\keyword{mindfulness}

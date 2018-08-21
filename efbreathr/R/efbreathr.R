@@ -1,22 +1,3 @@
-#' Summarise breath counting accuracy
-#'
-#' Summarise breath counting accuracy
-#' @param data data.frame returned by breath_counting_accuracy()
-#' @param participants data.frame with column 'p' listing participants to process
-#' @export
-#' @return data.frame
-summarise_breath_counting_accuracy <- function(data, participants) {
-  bc_accuracy <- data %>%
-    select(p) %>%
-    unique() %>%
-    dplyr::rename(participant = p) %>%
-    mutate(total=0,correct=0,incorrect=0)
-  expand.grid(p=participants$p) %>%
-    rowwise() %>%
-    do(., breath_counting_accuracy(.$p, data)) %>%
-    arrange(p)
-}
-
 #' Convert Experiment Factory breath counting data to CSV
 #'
 #' Convert Experiment Factory breath counting data to CSV
@@ -115,12 +96,10 @@ process_eprime_file <- function(path) {
 #'
 #' Process ePrime breath counting data
 #' (Levinson, Stoll, Kindy, Merry, & Davidson, 2014)
-#' @param p Participant number
-#' @param bc_df Breath counting data frame
-#' @keywords breath counting meditation
+#' @param df Breath counting data frame
+#' @keywords breath counting meditation mindfulness
 #' @export
-breath_counting_accuracy <- function(p, bc_df) {
-  df        <- filter(bc_df, p == p)
+breath_counting_accuracy <- function(df) {
   resp      <- 1
   row       <- 1
   total     <- 0
@@ -161,5 +140,5 @@ breath_counting_accuracy <- function(p, bc_df) {
       break
     }
   }
-  data.frame(p,total,correct,incorrect)
+  data.frame(total,correct,incorrect)
 }
