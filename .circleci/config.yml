@@ -14,7 +14,7 @@ jobs:
           command: |
             cd /tmp/src/
             ls
-            cd efbreathr
+            cd expfactory.breathcounting
             R -e 'devtools::install_deps(dependencies = TRUE)'
       - save_cache:
           key: deps1-{{ .Branch }}
