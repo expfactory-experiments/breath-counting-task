@@ -5,7 +5,7 @@ jobs:
       - EXPFACTORY_PACKAGE: expfactory.breathcounting
     working_directory: /tmp/src
     docker:
-      - image: appsilon/ci-base:1.0
+      - image: docker:18.01.0-ce-git
     steps:
       - checkout
       - restore_cache:
