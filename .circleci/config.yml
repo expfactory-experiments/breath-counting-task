@@ -132,6 +132,8 @@ expfactorytest: &expfactorytest
         echo "2. Copying package ${EXPFACTORY_PACKAGE} into it!"
         echo "docker cp ${EXPFACTORY_PACKAGE} expfactoryr:/data"
         docker cp ${EXPFACTORY_PACKAGE} expfactoryr:/data
+        docker exec expfactoryr ls /data
+        echo "docker exec expfactoryr ls /data"
         echo "3. Installing package and running tests!"
         echo "docker exec expfactoryr /code/docker/run.sh test"
         docker exec expfactoryr /code/docker/run.sh test
