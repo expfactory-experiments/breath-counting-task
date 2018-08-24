@@ -23,11 +23,11 @@ jobs:
       - run:
           command: |
             echo "Installing package expfactoryr"
-            R -e "devtools::install_github('expfactory/expfactoryr')"
-            cd /tmp/src/efbreathr
-            echo "Running devtools checks and tests for efbreathr"
+            R -e "devtools::install_github('expfactory/expfactory')"
+            cd /tmp/src/expfactory.breathcounting
+            echo "Running devtools checks and tests for expfactory.breathcounting"
             R -e 'devtools::check()'
             R -e 'devtools::test()'
       - store_artifacts:
-          path: /tmp/src/efbreathr/man/
+          path: /tmp/src/expfactory.breathcounting/man/
           destination: man
