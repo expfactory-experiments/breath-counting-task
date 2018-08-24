@@ -1,6 +1,8 @@
 version: 2
 jobs:
   build:
+    environment:
+      - EXPFACTORY_PACKAGE: expfactory.breathcounting
     working_directory: /tmp/src
     docker:
       - image: appsilon/ci-base:1.0
@@ -14,20 +16,21 @@ jobs:
           command: |
             cd /tmp/src/
             ls
-            cd expfactory.breathcounting
-            R -e 'devtools::install_deps(dependencies = TRUE)'
-      - save_cache:
-          key: deps1-{{ .Branch }}
-          paths:
-            - "/usr/local/lib/R/site-library"
-      - run:
-          command: |
-            echo "Installing package expfactoryr"
-            R -e "devtools::install_github('expfactory/expfactory')"
-            cd /tmp/src/expfactory.breathcounting
-            echo "Running devtools checks and tests for expfactory.breathcounting"
-            R -e 'devtools::check()'
-            R -e 'devtools::test()'
+            echo "1. Starting the expfactory/expfactoryr container"
+            echo "docker run --name expfactoryr -td --entrypoint bash expfactory/expfactoryr"
+            docker run --name expfactoryr -td --entrypoint bash expfactory/expfactoryr
+            if [ ! -d "${EXPFACTORY_PACKAGE}" ]
+                then
+                    echo "The package ${EXPFACTORY_PACKAGE} cannot be found."
+                    exit 1
+            fi
+            echo "2. Copying package ${EXPFACTORY_PACKAGE} into it!"
+            docker cp ${EXPFACTORY_PACKAGE}/* expfactoryr:/data
+            echo "3. Installing package and running tests!"
+            echo "docker exec expfactoryr /code/docker/run.sh test"
+            docker exec expfactoryr /code/docker/run.sh test
+            echo "4. Grabbing man pages from container!"
+            docker cp expfactoryr:/data/man ${EXPFACTORY_PACKAGE}/man 
       - store_artifacts:
           path: /tmp/src/expfactory.breathcounting/man/
           destination: man
