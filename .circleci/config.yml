@@ -215,15 +215,17 @@ jobs:
             - docker-v1-{{ .Branch }}
           paths:
             - /tmp/cache/container.tar.gz
-      - restore_cache:
-          key: dependency-cache-repo2docker
       - checkout
       - setup_remote_docker
       - run: *dockerenv
       - run: *expfactorytest
       - run: *dockersave
+      - save_cache:
+         key: docker-v1-{{ .Branch }}
+         paths:
+            - /tmp/cache/container.tar.gz
       - store_artifacts:
-          path: /tmp/src/expfactory.breathcounting/man/
+          path: /tmp/src/expfactory.breathcounting/man
           destination: man
       - persist_to_workspace:
           root: /tmp
