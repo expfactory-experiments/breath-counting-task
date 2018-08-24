@@ -137,6 +137,8 @@ expfactorytest: &expfactorytest
         echo "3. Installing package and running tests!"
         echo "docker exec expfactoryr /code/docker/run.sh test /data/${EXPFACTORY_PACKAGE}"
         docker exec expfactoryr /code/docker/run.sh test /data/${EXPFACTORY_PACKAGE}
+        reval=$?
+        echo "Return value for tests is ${retval}"
         echo "4. Grabbing man pages from container!"
         docker cp expfactoryr:/data/${EXPFACTORY_PACKAGE}/man ${EXPFACTORY_PACKAGE}/man 
 
