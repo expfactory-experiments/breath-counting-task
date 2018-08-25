@@ -136,7 +136,7 @@ expfactorytest: &expfactorytest
         echo "docker exec expfactoryr ls /data"
         echo "3. Installing package and running tests!"
         echo "docker exec expfactoryr /code/docker/run.sh test /data/${EXPFACTORY_PACKAGE}"
-        docker exec expfactoryr /code/docker/run.sh test /data/${EXPFACTORY_PACKAGE}
+        docker exec expfactoryr /code/docker/run.sh test /data/${EXPFACTORY_PACKAGE} && echo "pass" || echo "fail"
         reval=$?
         echo "Return value for tests is ${retval}"
         echo "4. Grabbing man pages from container!"
@@ -263,9 +263,6 @@ jobs:
       - run: *containerdiff
       - run: *githubsetup
       - run: *install
-      - add_ssh_keys: 
-          fingerprints: 
-            - "9a:c8:0e:b8:f5:5a:4c:7a:7e:7e:fd:76:9e:cb:46:b9"
       - run:
           name: Generate Inspection Manifest
           no_output_timeout: 40m
