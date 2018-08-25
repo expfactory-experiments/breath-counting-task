@@ -16,7 +16,7 @@ expfactory_breath_counting_to_csv <- function(path, t, exclude) {
     rowwise() %>%
     mutate(p=as.integer(gsub(".*/.*/(\\d+)/.*$", '\\1', path))) %>%
     filter(! p %in% exclude ) %>%
-    do(., efbreathr::process_breath_counting(.$path, .$p, json=FALSE))
+    do(., expfactory.breathcounting::process_breath_counting(.$path, .$p, json=FALSE))
   write.table(df, paste(path, '/bc.csv', sep=''), sep = ",", row.names = FALSE)
 }
 
@@ -29,7 +29,7 @@ expfactory_breath_counting_to_csv <- function(path, t, exclude) {
 #'bc <- expand.grid(token = participants$token) %>%
 #'  rowwise() %>%
 #'  mutate(path=paste0(data_dir, '/', token, '_finished/breath-counting-task-results.json')) %>%
-#'  do(., efbreathr::process_breath_counting(.$path, .$token))
+#'  do(., expfactory.breathcounting::process_breath_counting(.$path, .$token))
 #'
 #' @param path Path to data file
 #' @param p Participant identifier
@@ -42,7 +42,7 @@ process_breath_counting <- function(path, p, json=TRUE) {
     return(data_frame(p=p, path=path))
   }
   if (json) {
-    bc <- expfactoryr::process_expfactory_experiment(path)
+    bc <- expfactory::process_expfactory_experiment(path)
   } else {
     bc <- read.csv(path, header = TRUE)
   }
@@ -62,7 +62,7 @@ eprime_breath_counting_to_csv <- function(path) {
   paths <- list.files(path, pattern = ".txt", full.names = TRUE, recursive = TRUE)
   df <- expand.grid(path=paths, stringsAsFactors=FALSE) %>%
     rowwise() %>%
-    do(., efbreathr::process_eprime_file(.$path))
+    do(., expfactory.breathcounting::process_eprime_file(.$path))
   write.table(df, paste(path, '/bc.csv', sep=''), sep = ",", row.names = FALSE)
 }
 

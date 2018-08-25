@@ -24,7 +24,7 @@ Data frame
 bc <- expand.grid(token = participants$token) \%>\%
  rowwise() \%>\%
  mutate(path=paste0(data_dir, '/', token, '_finished/breath-counting-task-results.json')) \%>\%
- do(., efbreathr::process_breath_counting(.$path, .$token))
+ do(., expfactory.breathcounting::process_breath_counting(.$path, .$token))
 
 }
 \keyword{breath}
