@@ -1,5 +1,7 @@
 library(tidyverse)
 library(testthat)
+library(magrittr)
+
 library('expfactory.breathcounting')
 context('Breath counting')
 
@@ -12,8 +14,10 @@ test_that("expfactory_breath_counting_to_csv() works", {
 })
 
 ## JSON data
-json_p = data.frame(token = c('00b96573-0f35-4f17-88e4-2836ca7deec1','03e32ecf-8939-4338-ae43-ba545c15601a',
+json_p = data.frame(token = c('00b96573-0f35-4f17-88e4-2836ca7deec1',
+                              '03e32ecf-8939-4338-ae43-ba545c15601a',
                               '06285401-fc7c-41ce-be54-9b03bf26c69f'))
+
 fixture_dir <- '../fixtures/2'
 path <- paste0(fixture_dir,'/',json_p[1,1],'_finished/breath-counting-task-results.json')
 test_that("process_breath_counting() can process a JSON file", {
