@@ -5,6 +5,8 @@
 #' @param t Time point
 #' @param exclude Participants to exclude
 #' @export
+library(magrittr)
+
 expfactory_breath_counting_to_csv <- function(path, t, exclude) {
   # make a bc.csv consumable by breath_counting_accuracy()
   paths <-
