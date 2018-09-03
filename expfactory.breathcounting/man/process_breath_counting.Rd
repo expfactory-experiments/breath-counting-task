@@ -21,11 +21,12 @@ Data frame
 (\url{https://expfactory-experiments.github.io/breath-counting-task/}).
 }
 \examples{
+\dontrun{
 bc <- expand.grid(token = participants$token) \%>\%
  rowwise() \%>\%
  mutate(path=paste0(data_dir, '/', token, '_finished/breath-counting-task-results.json')) \%>\%
  do(., process_breath_counting(.$path, .$token))
-
+}
 }
 \keyword{breath}
 \keyword{expfactory}
