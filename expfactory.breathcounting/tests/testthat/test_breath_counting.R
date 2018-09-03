@@ -1,4 +1,3 @@
-library(tidyverse)
 context('Breath counting')
 
 test_that("process_expfactory_bc_file() can process a CSV file", {
