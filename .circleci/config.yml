@@ -218,6 +218,8 @@ jobs:
       - checkout
       - setup_remote_docker
       - run: *dockerenv
+      - run: *dockerbuild
+      - run: *dockersave
       - run: *expfactorytest
       - save_cache:
          key: docker-v1-{{ .Branch }}
@@ -340,17 +342,6 @@ workflows:
             tags:
               only: /.*/
 
-      - update_cache:
-          requires:
-            - build
-            - deploy
-            - manifest
-          filters:
-            branches:
-              ignore: /docs?/.*/
-            tags:
-              only: /.*/
-
       # Upload the container to Docker Hub
       - deploy:
           requires:
@@ -366,6 +357,17 @@ workflows:
           requires:
             - build
             - deploy
+          filters:
+            branches:
+              only: master
+            tags:
+              only: /.*/
+
+      - update_cache:
+          requires:
+            - build
+            - deploy
+            - manifest
           filters:
             branches:
               only: master
