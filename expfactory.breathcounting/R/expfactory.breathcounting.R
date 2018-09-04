@@ -1,4 +1,3 @@
-library(tidyverse)
 
 #' Convert Experiment Factory breath counting data to CSV
 #'
@@ -6,6 +5,8 @@ library(tidyverse)
 #' @param path Path to data files
 #' @param t Time point
 #' @param exclude Participants to exclude
+#' @importFrom magrittr %>%
+#' @importFrom dplyr rowwise mutate filter do select
 #' @export
 
 expfactory_breath_counting_to_csv <- function(path, t, exclude) {
@@ -73,7 +74,6 @@ eprime_breath_counting_to_csv <- function(path) {
 #' Process ePrime Breath Counting Data File
 #'
 #' Process ePrime breath counting data file
-#' (Levinson, Stoll, Kindy, Merry, & Davidson, 2014)
 #' @param path Path to ePrime data file
 #' @keywords ePrime
 #' @export
