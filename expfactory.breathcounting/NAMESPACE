@@ -1,4 +1,7 @@
 import(tidyverse)
+import(expfactory)
+importFrom("stats", "filter", "rt")
+importFrom("utils", "read.csv", "write.table")
 export(breath_counting_accuracy)
 export(eprime_breath_counting_to_csv)
 export(expfactory_breath_counting_to_csv)
