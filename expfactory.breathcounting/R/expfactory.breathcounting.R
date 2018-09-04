@@ -40,11 +40,12 @@ expfactory_breath_counting_to_csv <- function(path, t, exclude) {
 #' @param p Participant identifier
 #' @param json=TRUE Boolean indicating whether ANT data format is JSON (TRUE) or CSV (FALSE)
 #' @keywords expfactory mindfulness breath
+#' @importFrom utils read.csv
 #' @export
 #' @return Data frame
 process_breath_counting <- function(path, p, json=TRUE) {
   if(!file.exists(path)){
-    return(data_frame(p=p, path=path))
+    return(data.frame(p=p, path=path))
   }
   if (json) {
     bc <- expfactory::process_expfactory_experiment(path)
@@ -62,6 +63,7 @@ process_breath_counting <- function(path, p, json=TRUE) {
 #'
 #' Convert ePrime breath counting data to CSV
 #' @param path Path to ePrime data files
+#' @importFrom utils write.table
 #' @export
 eprime_breath_counting_to_csv <- function(path) {
   paths <- list.files(path, pattern = ".txt", full.names = TRUE, recursive = TRUE)
@@ -74,6 +76,7 @@ eprime_breath_counting_to_csv <- function(path) {
 #' Process ePrime Breath Counting Data File
 #'
 #' Process ePrime breath counting data file
+#' (Levinson, Stoll, Kindy, Merry, & Davidson, 2014)
 #' @param path Path to ePrime data file
 #' @keywords ePrime
 #' @export

@@ -11,5 +11,6 @@ process_eprime_file(path)
 }
 \description{
 Process ePrime breath counting data file
+(Levinson, Stoll, Kindy, Merry, & Davidson, 2014)
 }
 \keyword{ePrime}

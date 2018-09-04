@@ -13,7 +13,8 @@ Imports:
   expfactory,
   dplyr,
   magrittr,
-  rprime
+  rprime,
+  utils
 RoxygenNote: 6.0.1
 Suggests:
   testthat (>= 1.0.2)
