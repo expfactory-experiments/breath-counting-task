@@ -167,8 +167,8 @@ dockerbuild: &dockerbuild
         echo "0. Building Docker Container with expfactory builder"
         source ${BASH_ENV}
         echo "1. Starting vanessa/expfactory-builder container"
-        echo "docker run -td --entrypoing bash vanessa/expfactory-builder"
-        docker run --name expfactory-builder -td --entrypoing bash vanessa/expfactory-builder
+        echo "docker run -td --entrypoint bash vanessa/expfactory-builder"
+        docker run --name expfactory-builder -td --entrypoint bash vanessa/expfactory-builder
         echo "2. Copying experiment folder into container at /data"
         mkdir -p /tmp/build/${CIRCLE_PROJECT_REPONAME}
         cp -R /tmp/src /tmp/build/${CIRCLE_PROJECT_REPONAME}
