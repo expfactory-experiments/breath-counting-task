@@ -136,11 +136,21 @@ expfactorytest: &expfactorytest
         echo "docker exec expfactoryr ls /data"
         echo "3. Installing package and running tests."
         echo "docker exec expfactoryr /code/docker/run.sh test /data/${EXPFACTORY_PACKAGE}"
-        docker exec expfactoryr /code/docker/run.sh test /data/${EXPFACTORY_PACKAGE} && echo "$?" || echo "1"
+        docker exec expfactoryr /code/docker/run.sh test /data/${EXPFACTORY_PACKAGE} && retval="$?" || retval="1"
+        if [ "${retval}" -neq 0 ]; then
+            echo "Return value $retval is nonzero, check errors above."
+            #exit $retval
+        else
+            echo "Return value $retval, good job!"
+        fi
+        echo "4. Building package for saving."
+        echo "docker exec expfactoryr exec R CMD build /data/${EXPFACTORY_PACKAGE}"
+        docker exec expfactoryr exec R CMD build /data/${EXPFACTORY_PACKAGE}
         echo "docker exec expfactoryr ls /data/${EXPFACTORY_PACKAGE}"
         docker exec expfactoryr ls /data/${EXPFACTORY_PACKAGE}
-        echo "4. Grabbing man pages from container!"
-        docker cp expfactoryr:/data/${EXPFACTORY_PACKAGE}/man ${EXPFACTORY_PACKAGE}/man 
+        echo "5. Grabbing man pages and package from container!"
+        mkdir -p /tmp/package
+        docker cp expfactoryr:/data/. /tmp/package/ 
 
 
 githubsetup: &githubsetup
@@ -216,21 +226,22 @@ jobs:
             - /tmp/cache/container.tar.gz
       - checkout
       - setup_remote_docker
+      - run: *expfactorytest
       - run: *dockerenv
       - run: *dockerbuild
       - run: *dockersave
-      - run: *expfactorytest
       - save_cache:
          key: docker-v1-{{ .Branch }}
          paths:
             - /tmp/cache/container.tar.gz
       - store_artifacts:
-          path: /tmp/src/expfactory.breathcounting/man
-          destination: man
+          path: /tmp/package
+          destination: package
       - persist_to_workspace:
           root: /tmp
           paths:
             - cache/container.tar.gz
+            - package
             - src
 
   update_cache:
@@ -282,16 +293,23 @@ jobs:
                     git checkout gh-pages || git checkout --orphan gh-pages
                     # Save all previous tags, so we don't pull and re-generate
                     mkdir -p ../out-old
-                    if ls *.json 1> /dev/null 2>&1; then
-                        cp *.json ../out-old/
-                    fi
+                    rm -rf config.json
+                    for ext in json tar.gz
+                        do
+                        if /bin/bash -c "ls *.${ext}" 1> /dev/null 2>&1; then
+                                /bin/bash -c "cp *.${ext} ../out-old/" 
+                        fi
+                    done                    
                     git rm -rf .
                     # ensure that github pages are ignored
                     mkdir -p .circleci && cp -a ../.circleci/. .circleci/.
                     # Copy back previous files
-                    if ls ../out-old/*.json 1> /dev/null 2>&1; then
-                        cp ../out-old/*.json ${PWD}
-                    fi
+                    for ext in json tar.gz
+                        do
+                           if /bin/bash -c "ls ../out-old/*.${ext}" 1> /dev/null 2>&1; then
+                               /bin/bash -c "cp ../out-old/*.${ext} ${PWD}"
+                        fi
+                    done
                     cp .circleci/template.html template.html
                     # replace container name in index.html
                     envsubst < template.html > index.html
@@ -313,6 +331,9 @@ jobs:
                           fi
                           echo "${tag}" >> tags.json
                     done
+                    echo "3. Adding package and manifests..."
+                    # Copy the package(s)
+                    cp /tmp/package/*.tar.gz ${PWD}
                     # Copy the inspect to latest
                     cp "inspect-${DOCKER_TAG}.json" inspect-latest.json
                     # Write the tags json
