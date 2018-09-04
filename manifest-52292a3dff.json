@@ -1,0 +1,136 @@
+[
+    {
+        "Id": "sha256:60d388a1e6fd0f59b6be56960febadff132a8e846e5038372af587ea36f1ffe2",
+        "RepoTags": [
+            "expfactory/breath-counting-task:52292a3dff"
+        ],
+        "RepoDigests": [
+            "expfactory/breath-counting-task@sha256:4ded80e49c35ad3e45ca86353b87f2a6c334277f3a94bd2ab198f30f52d8f4f3"
+        ],
+        "Parent": "",
+        "Comment": "",
+        "Created": "2018-09-04T18:18:59.061852814Z",
+        "Container": "d30c8c1d223ccc84dcb4fb5a708e3266fbd14abb3d2a50428a29e28649f183e9",
+        "ContainerConfig": {
+            "Hostname": "d30c8c1d223c",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "ExposedPorts": {
+                "5000/tcp": {},
+                "80/tcp": {}
+            },
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "DEBIAN_FRONTEND=noninteractive",
+                "EXPFACTORY_STUDY_ID=expfactory",
+                "EXPFACTORY_SERVER=localhost",
+                "EXPFACTORY_CONTAINER=true",
+                "EXPFACTORY_DATA=/scif/data",
+                "EXPFACTORY_DATABASE=filesystem",
+                "EXPFACTORY_HEADLESS=false",
+                "EXPFACTORY_BASE=/scif/apps"
+            ],
+            "Cmd": [
+                "/bin/sh",
+                "-c",
+                "#(nop) ",
+                "EXPOSE 80/tcp"
+            ],
+            "ArgsEscaped": true,
+            "Image": "sha256:a7b3346b275be028e486fdbdaea18aa4fd59f2f2d0ebd9bc51a5ffd0e4809aeb",
+            "Volumes": null,
+            "WorkingDir": "/scif/apps",
+            "Entrypoint": [
+                "/bin/bash",
+                "/startscript.sh"
+            ],
+            "OnBuild": [],
+            "Labels": {
+                "EXPERIMENT_breath-counting-task": "/scif/apps/breath-counting-task"
+            }
+        },
+        "DockerVersion": "17.09.0-ce",
+        "Author": "",
+        "Config": {
+            "Hostname": "",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "ExposedPorts": {
+                "5000/tcp": {},
+                "80/tcp": {}
+            },
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "DEBIAN_FRONTEND=noninteractive",
+                "EXPFACTORY_STUDY_ID=expfactory",
+                "EXPFACTORY_SERVER=localhost",
+                "EXPFACTORY_CONTAINER=true",
+                "EXPFACTORY_DATA=/scif/data",
+                "EXPFACTORY_DATABASE=filesystem",
+                "EXPFACTORY_HEADLESS=false",
+                "EXPFACTORY_BASE=/scif/apps"
+            ],
+            "Cmd": null,
+            "ArgsEscaped": true,
+            "Image": "sha256:a7b3346b275be028e486fdbdaea18aa4fd59f2f2d0ebd9bc51a5ffd0e4809aeb",
+            "Volumes": null,
+            "WorkingDir": "/scif/apps",
+            "Entrypoint": [
+                "/bin/bash",
+                "/startscript.sh"
+            ],
+            "OnBuild": [],
+            "Labels": {
+                "EXPERIMENT_breath-counting-task": "/scif/apps/breath-counting-task"
+            }
+        },
+        "Architecture": "amd64",
+        "Os": "linux",
+        "Size": 659553410,
+        "VirtualSize": 659553410,
+        "GraphDriver": {
+            "Data": null,
+            "Name": "aufs"
+        },
+        "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:644879075e24394efef8a7dddefbc133aad42002df6223cacf98bd1e3d5ddde2",
+                "sha256:d7ff1dc646ba52a02312b535446d6c9b72cd09fda0480524e4828554efb2f748",
+                "sha256:686245e78935e73b737c9a82111c3c7df35f5529d06ce8c2f9a7cd32ec90b456",
+                "sha256:d73dd9e652956dccbbef716de4b172cc15fff644cc92fc69d221cc3a1cb89a39",
+                "sha256:2de391e51d731ba02b708038a7f98b7103061b916727bcd165e9ee6402f4cdde",
+                "sha256:3fba85f2748aa131a84f7452566ed4e14a06b416767f1c385beb4433d8ac0e03",
+                "sha256:ef698217edad7a5afe430ff4fddabbdc6edf16704f6242b26189e5d9d36f6713",
+                "sha256:9ce509124df7c23ad31850846a5ba49dab0cd33c643f5ec641b04b40c45c4674",
+                "sha256:1b68001888f5a2b1766caf43c2934cff3b9ebc475da13414a3bdcd7ee7620cc8",
+                "sha256:c60c901174091615a799fed4ead6676f43587ee805fc3f0c92b57b93b034d21b",
+                "sha256:497bfa576a6370bd46050faeeccd8efd9653ef08abc01be2a8d86104b7dabbd3",
+                "sha256:7d841ccd3807e9ac9e2c3fc575e27bc74fa44632bdf90af249c57dab19ac1ca0",
+                "sha256:b5b50f30d3ba50c199ca5bc9401f6197f8f0b965d1fdedec2d09f26c60442178",
+                "sha256:e0e417a348358d1f007b7dff3a074a33813fca360541f0e295ccea09accbfbe5",
+                "sha256:2479c67910f1f3b2c72bdd35213cc057c3c5799e3664933eefbd74055c5b66d1",
+                "sha256:8fa4100b6dc0fdec2355c997f0249743dfed04be107ac8526342712d57c0fcec",
+                "sha256:db843d6ffded14afddba480f7abdfa916fc5135e7d8f9a27fe2c823b613ec749",
+                "sha256:8ed41023b2ea8100de275b16dfbde58e89b16efe3f63bd7794e940aa49be04be",
+                "sha256:dff1abe9422f3443b7bc7276218a3755b6fb370dab2debcb2a2a9ce12dd9bf4c",
+                "sha256:6f07756739a0e1508a893857eb0123d1736b45d122341d6d422c60d1e882bc0f"
+            ]
+        },
+        "Metadata": {
+            "LastTagTime": "0001-01-01T00:00:00Z"
+        }
+    }
+]
