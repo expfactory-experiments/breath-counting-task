@@ -226,8 +226,8 @@ jobs:
             - /tmp/cache/container.tar.gz
       - checkout
       - setup_remote_docker
-      - run: *expfactorytest
       - run: *dockerenv
+      - run: *expfactorytest
       - run: *dockerbuild
       - run: *dockersave
       - save_cache:
