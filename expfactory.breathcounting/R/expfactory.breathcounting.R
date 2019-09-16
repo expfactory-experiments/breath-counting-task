@@ -43,7 +43,7 @@ expfactory_breath_counting_to_csv <- function(path, t, exclude) {
 #'}
 #' @param path Path to data file
 #' @param p Participant identifier
-#' @param json Boolean indicating whether ANT data format is JSON (TRUE) or CSV (FALSE)
+#' @param json Boolean indicating whether ANT data format is JSON (TRUE), default or CSV (FALSE)
 #' @keywords expfactory mindfulness breath
 #' @importFrom utils read.csv
 #' @export
