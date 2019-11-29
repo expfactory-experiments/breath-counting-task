@@ -9,5 +9,7 @@ Install it and read the docs. They're not very good. Sorry.
 
 # How do I get it?
 
+```
 library(devtools)
 install_github('expfactory-experiments/breath-counting-task/expfactory.breathcounting')
+```
