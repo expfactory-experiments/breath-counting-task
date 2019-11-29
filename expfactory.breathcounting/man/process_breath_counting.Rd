@@ -11,7 +11,7 @@ process_breath_counting(path, p, json = TRUE)
 
 \item{p}{Participant identifier}
 
-\item{json=TRUE}{Boolean indicating whether ANT data format is JSON (TRUE) or CSV (FALSE)}
+\item{json}{Boolean indicating whether ANT data format is JSON (TRUE), default or CSV (FALSE)}
 }
 \value{
 Data frame
