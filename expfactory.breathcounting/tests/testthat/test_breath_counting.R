@@ -1,11 +1,11 @@
 context('Breath counting')
 
-test_that("process_expfactory_bc_file() can process a CSV file", {
-  expect_silent(process_breath_counting('../fixtures/1/1/1_bc.csv', p=1, json=FALSE))
+test_that("bc_process_expfactory_file() can process a CSV file", {
+  expect_silent(bc_process_expfactory_file('../fixtures/1/1/1_bc.csv', p=1, json=FALSE))
 })
 
-test_that("expfactory_breath_counting_to_csv() works", {
-  expect_silent(expfactory_breath_counting_to_csv('../fixtures/1', 1, c(2,6,7)))
+test_that("bc_process_expfactory() works", {
+  expect_silent(bc_process_expfactory('../fixtures/1', 1, c(2,6,7)))
 })
 
 ## JSON data
@@ -15,25 +15,26 @@ json_p = data.frame(token = c('00b96573-0f35-4f17-88e4-2836ca7deec1',
 
 fixture_dir <- '../fixtures/2'
 path <- paste0(fixture_dir,'/',json_p[1,1],'_finished/breath-counting-task-results.json')
-test_that("process_breath_counting() can process a JSON file", {
-  expect_silent(process_breath_counting(path, p=1))
+test_that("bc_process_expfactory_file() can process a JSON file", {
+  expect_silent(bc_process_expfactory_file(path, p=1))
 })
-bc <- process_breath_counting(path, p=1)
-test_that("process_breath_counting() parses data correctly", {
+bc <- bc_process_expfactory_file(path, p=1)
+test_that("bc_process_expfactory_file() parses data correctly", {
   expect_equal(bc[[1,'rt']],14085)
 })
 
 bc <- expand.grid(token = json_p$token) %>%
-  rowwise() %>%
+  group_by(token) %>%
   mutate(path=paste0(fixture_dir, '/', token, '_finished/breath-counting-task-results.json')) %>%
-  do(., process_breath_counting(.$path, .$token))
+  do(., bc_process_expfactory_file(.$path, .$token)) %>%
+  ungroup()
 
 df <- bc %>%
   filter(p == '00b96573-0f35-4f17-88e4-2836ca7deec1')
-test_that("breath_counting_accuracy() returns a data frame", {
-  expect_is(breath_counting_accuracy(df), "data.frame")
+test_that("bc_accuracy() returns a data frame", {
+  expect_is(bc_accuracy(df), "data.frame")
 })
-foo <- breath_counting_accuracy(df)
-test_that("breath_counting_accuracy() is accurate", {
+foo <- bc_accuracy(df)
+test_that("bc_accuracy() is accurate", {
   expect_equal(foo[[1,'correct']],12)
 })
