@@ -5,7 +5,7 @@ test_that("bc_process_expfactory_file() can process a CSV file", {
 })
 
 test_that("bc_process_expfactory() works", {
-  expect_silent(bc_process_expfactory('../fixtures/1', 1, c(2,6,7)))
+  expect_silent(bc_process_expfactory('../fixtures/1', 1))
 })
 
 ## JSON data
@@ -38,3 +38,9 @@ foo <- bc_accuracy(df)
 test_that("bc_accuracy() is accurate", {
   expect_equal(foo[[1,'correct']],12)
 })
+
+test_that('bc_process_eprime_file() returns a data frame', {
+  expect_is(bc_process_eprime_file('../fixtures/3/bc15_converted-2-1.txt'), 'data.frame')
+})
+
+

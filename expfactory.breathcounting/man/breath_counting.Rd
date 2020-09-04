@@ -4,8 +4,13 @@
 \alias{breath_counting}
 \title{Convert ePrime or Experiment Factory breath counting data to data frame}
 \usage{
-breath_counting(data_path, type = "expfactory", format = "json",
-  participants, t, exclude)
+breath_counting(
+  data_path,
+  type = "expfactory",
+  format = "json",
+  participants,
+  t
+)
 }
 \arguments{
 \item{data_path}{Path to data files}
@@ -17,8 +22,6 @@ breath_counting(data_path, type = "expfactory", format = "json",
 \item{participants}{Data frame}
 
 \item{t}{Numeric Time point}
-
-\item{exclude}{Participants to exclude}
 }
 \value{
 Data frame

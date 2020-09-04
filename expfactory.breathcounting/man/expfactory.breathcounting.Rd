@@ -3,7 +3,6 @@
 \docType{package}
 \name{expfactory.breathcounting}
 \alias{expfactory.breathcounting}
-\alias{expfactory.breathcounting-package}
 \title{expfactory.breathcounting: A package for processing breath counting data.}
 \description{
 This package processes data generated from a breath counting task

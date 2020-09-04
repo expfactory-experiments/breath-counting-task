@@ -1,5 +1,9 @@
 # expfactory.breathcounting
 
+## 0.3.1
+
+Fix regression in bc_process_eprime_file
+
 ## 0.3.0
 
 Major API changes.

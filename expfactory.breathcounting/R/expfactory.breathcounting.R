@@ -39,20 +39,18 @@ bc_all_accuracy <- function(df, c='subject') {
 #' @param format String ('csv' or 'json', default='json')
 #' @param participants Data frame
 #' @param t Numeric Time point
-#' @param exclude Participants to exclude
 #' @importFrom magrittr %>%
 #' @importFrom dplyr group_by ungroup left_join do select mutate rename
 #' @importFrom rlang .data
 #' @importFrom utils write.csv
 #' @export
 #' @return Data frame
-breath_counting <- function(data_path, type='expfactory', format='json',
-                                   participants, t, exclude) {
+breath_counting <- function(data_path, type='expfactory', format='json', participants, t) {
   if (type == 'eprime') {
     df <- bc_process_eprime(data_path)
   } else if (type == 'expfactory') {
     if (format == 'csv') {
-      df <- bc_process_expfactory(data_path, t, exclude)
+      df <- bc_process_expfactory(data_path, t)
     } else { # expfactory, format == json
       df <- expand.grid(token = participants$token) %>%
         mutate(path=paste0(data_path, '/', .data$token, '_finished/breath-counting-task-results.json')) %>%
@@ -72,18 +70,16 @@ breath_counting <- function(data_path, type='expfactory', format='json',
 #' Process Experiment Factory breath counting data files.
 #' @param path Path to data files
 #' @param t Time point
-#' @param exclude Participants to exclude
 #' @importFrom magrittr %>%
 #' @importFrom dplyr rowwise filter do select mutate
 #' @importFrom rlang .data
 #' @export
 #' @return Data frame
-bc_process_expfactory <- function(path, t, exclude) {
+bc_process_expfactory <- function(path, t) {
   paths <-list.files(path, pattern = ".*_bc.csv", full.names = TRUE, recursive = TRUE)
   df <- expand.grid(path=paths, time=t, stringsAsFactors = FALSE) %>%
     group_by(.data$path) %>%
     mutate(p=as.integer(gsub(".*/.*/(\\d+)/.*$", '\\1', path))) %>%
-    filter(! .data$p %in% exclude) %>%
     do(., bc_process_expfactory_file(.data$path, .data$p, json=FALSE)) %>%
     ungroup()
   return(df)
@@ -145,9 +141,10 @@ bc_process_eprime <- function(path) {
 #' (Levinson, Stoll, Kindy, Merry, & Davidson, 2014)
 #' @param path Path to ePrime data file
 #' @keywords ePrime
-#' @importFrom dplyr add_row rename
+#' @importFrom dplyr across add_row rename
 #' @importFrom rlang .data
 #' @importFrom rprime FrameList keep_levels read_eprime to_data_frame
+#' @export
 #' @return Data frame
 bc_process_eprime_file <- function(path) {
   lines  <- read_eprime(path)
@@ -160,7 +157,8 @@ bc_process_eprime_file <- function(path) {
   to_pick    <- c("Sample", "Wait4TUTSlide.RESP", "Wait4TUTSlide.RT")
   df         <- df[to_pick]
   df$subject <- frame1$Subject
-  df <- rename(df, response = .data$Wait4TUTSlide.RESP, rt = .data$Wait4TUTSlide.RT)
+  df <- rename(df, response = .data$Wait4TUTSlide.RESP, rt = .data$Wait4TUTSlide.RT) %>%
+    mutate(across(c(Sample, rt, subject), as.integer))
   # Add initial {DOWNARROW} to correct for a known issue in the ePrime script provided by Daniel Levinson,
   # which doesn't record the first keypress (I think) on the first trial.  Bug requires a bit more testing
   # to confirm it's the _initial_ keypress which is lost, but it definitely omits 1 {DOWNARROW} keypress.
@@ -190,7 +188,7 @@ bc_accuracy <- function(df, y) {
       } else if (df[row,'response'] == '{RIGHTARROW}') {
         total     <- total + 1
         incorrect <- incorrect + 1
-        resp <- 1 # reset count
+        resp      <- 1 # reset count
       } else {
         # shouldn't get here
       }
@@ -218,5 +216,5 @@ bc_accuracy <- function(df, y) {
       break
     }
   }
-  data.frame(total,correct,incorrect)
+  data.frame(responses=row-1,total,correct,incorrect)
 }
