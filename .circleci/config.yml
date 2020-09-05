@@ -176,9 +176,9 @@ dockerbuild: &dockerbuild
     command: |
         source ${BASH_ENV}
         echo "0. Building Docker Container with expfactory builder"
-        echo "1. Starting vanessa/expfactory-builder container"
-        echo "docker run -td --entrypoint bash vanessa/expfactory-builder"
-        docker run --name expfactory-builder -td --entrypoint bash vanessa/expfactory-builder
+        echo "1. Starting quay.io/vanessa/expfactory-builder container"
+        echo "docker run -td --entrypoint bash quay.io/vanessa/expfactory-builder"
+        docker run --name expfactory-builder -td --entrypoint bash quay.io/vanessa/expfactory-builder
         echo "2. Copying experiment folder into container at /data"
         mkdir -p /tmp/build/${CIRCLE_PROJECT_REPONAME}
         cp -R /tmp/src/* /tmp/build/${CIRCLE_PROJECT_REPONAME}
