@@ -158,7 +158,7 @@ bc_process_eprime_file <- function(path) {
   df         <- df[to_pick]
   df$subject <- frame1$Subject
   df <- rename(df, response = .data$Wait4TUTSlide.RESP, rt = .data$Wait4TUTSlide.RT) %>%
-    mutate(across(c(Sample, rt, subject), as.integer))
+    mutate(across(c(.data$Sample, .data$rt, .data$subject), as.integer))
   # Add initial {DOWNARROW} to correct for a known issue in the ePrime script provided by Daniel Levinson,
   # which doesn't record the first keypress (I think) on the first trial.  Bug requires a bit more testing
   # to confirm it's the _initial_ keypress which is lost, but it definitely omits 1 {DOWNARROW} keypress.
@@ -216,5 +216,5 @@ bc_accuracy <- function(df, y) {
       break
     }
   }
-  data.frame(responses=row-1,total,correct,incorrect)
+  data.frame(responses=row-1, total, correct, incorrect, percent = correct / total)
 }

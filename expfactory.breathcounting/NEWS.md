@@ -1,5 +1,10 @@
 # expfactory.breathcounting
 
+## 0.3.2
+
+* bc_process_eprime() can't handle 16-bit data (converted fixture to 8-bit)
+* bc_accuracy() now includes percentage accuracy 
+
 ## 0.3.1
 
 Fix regression in bc_process_eprime_file
